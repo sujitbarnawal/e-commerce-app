@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     head:{
       titleTemplate:'%s - Ecommerce',
       meta:[
-        {name:"description",content:"E-commerce"}
+        {name:"description",content:"Online Pasal"}
       ]
     },
     pageTransition:{
