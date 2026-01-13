@@ -19,7 +19,7 @@ useSeo('Contact', 'How to contact us?')
                     you. Send us a message and we'll respond as soon as possible.</p>
             </div>
 
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 <div class="bg-white p-4 flex items-center gap-4">
                     <p class="bg-blue-100 p-3 rounded-[50%]"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
@@ -75,23 +75,23 @@ useSeo('Contact', 'How to contact us?')
                 <div class="flex flex-col md:flex-row gap-4">
                     <div class="flex-1">
                         <label class="block font-lg font-semibold mb-2" for="name">Your Name</label>
-                        <input class="w-full border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2"
+                        <input id="name" class="w-full border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2"
                             type="text" placeholder="Aaditya Dhungana" v-model="name">
                     </div>
                     <div class="flex-1">
                         <label class="block font-lg font-semibold mb-2" for="email">Email Address</label>
-                        <input class="w-full border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2"
+                        <input id="email" class="w-full border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2"
                             type="text" placeholder="aaditya@gmail.com" v-model="email">
                     </div>
                 </div>
                 <div>
                     <label class="block font-lg font-semibold mb-2" for="subject">Subject</label>
-                    <input class="w-full border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2" type="text"
+                    <input id="subject" class="w-full border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2" type="text"
                         placeholder="How can we help?" v-model="subject">
                 </div>
                 <div>
                     <label class="block font-lg font-semibold mb-2" for="message">Message</label>
-                    <textarea rows="5" class="w-full  border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2"
+                    <textarea id="message" rows="5" class="w-full  border mb-2 px-4 py-2 focus:outline-none  rounded-lg focus:ring-2"
                         type="text" placeholder="Tell us more about your inquiry..." v-model="message"></textarea>
                 </div>
 

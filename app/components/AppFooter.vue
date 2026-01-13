@@ -42,7 +42,7 @@
                 <div class="space-y-4">
                     <h3 class="text-white font-semibold">Join our Newsletter</h3>
                     <div class="flex">
-                        <input type="email" placeholder="Email"
+                        <input id="subscribe" type="email" placeholder="Email"
                             class="bg-slate-800 border-none rounded-l-lg px-4 py-2 w-full focus:ring-1 focus:ring-blue-500 focus:outline-none">
                         <button
                             class="bg-white text-blue-600 px-4 py-2 rounded-r-lg hover:scale-105 transition-transform">Join</button>
