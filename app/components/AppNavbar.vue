@@ -7,7 +7,7 @@ const isMobileMenu = ref(false)
     <header class=" flex items-center h-[60px] sticky top-0 bg-white">
         <nav class="w-[90%] mx-auto flex items-center justify-between">
 
-            <p @click="navigateTo('/')" class="text-blue-600 text-xl font-bold cursor-pointer">Ecommerce</p>
+            <p @click="navigateTo('/')" class="text-blue-600 text-xl font-bold cursor-pointer">Online Pasal</p>
             <div class="hidden md:flex items-center gap-4 text-lg ">
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
                     active-class="underline" to="/">Home</NuxtLink>
