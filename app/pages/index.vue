@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeo("Home", "Visit the Ecommerce home page")
+useSeo("Home", "Visit the Online Pasal home page")
 </script>
 
 <template>

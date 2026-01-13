@@ -3,6 +3,8 @@ import saurav_img from "../assets/images/saurav.jpeg"
 import ganesh_img from "../assets/images/ganesh.jpeg"
 import roman_img from "../assets/images/roman.jpeg"
 
+useSeo('About Us',"All about the Online Pasal")
+
 const stats = [
     { label: 'Happy Customers', value: '10K+' },
     { label: 'Products Delivered', value: '50K+' },
@@ -91,7 +93,7 @@ const reviews = [
             </div>
         </section>
 
-        <section class="py-20 text-center">
+        <section class="py-20 text-center mb-3">
             <h2 class="text-3xl font-bold mb-6">Ready to start shopping?</h2>
             <NuxtLink to="/products"
                 class="bg-blue-600 text-white px-10 py-4 rounded-full font-bold hover:bg-blue-700 transition-transform hover:scale-105 inline-block">

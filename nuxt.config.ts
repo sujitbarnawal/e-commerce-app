@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   app:{
     head:{
-      titleTemplate:'%s - Ecommerce',
+      titleTemplate:'%s - Online Pasal',
       meta:[
         {name:"description",content:"Online Pasal"}
       ]
