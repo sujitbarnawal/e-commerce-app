@@ -7,6 +7,10 @@ useSeoMeta({
     title: 'Login',
     description: 'Login to explore our products'
 });
+
+definePageMeta({
+    layout:false
+})
 </script>
 
 <template>

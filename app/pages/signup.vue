@@ -8,6 +8,9 @@ useSeoMeta({
     title: 'Signup',
     description: 'Create account to connect with Online Pasal'
 });
+definePageMeta({
+    layout:false
+})
 </script>
 
 <template>
