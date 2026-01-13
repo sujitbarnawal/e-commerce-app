@@ -16,6 +16,8 @@ const isMobileMenu = ref(false)
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
                     active-class="underline" to="/products">Products</NuxtLink>
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
+                    active-class="underline" to="/contact">Contact</NuxtLink>
+                <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
                     active-class="underline" to="/cart">Cart</NuxtLink>
             </div>
             <p @click="isMobileMenu = true" class="md:hidden">
@@ -41,6 +43,8 @@ const isMobileMenu = ref(false)
                 <NuxtLink @click="isMobileMenu = false"
                     class="text-blue-600 hover:scale-105 transition-transform duration-75" active-class="underline"
                     to="/products">Products</NuxtLink>
+                <NuxtLink @click="isMobileMenu = false" class="text-blue-600 hover:scale-105 transition-transform duration-75"
+                    active-class="underline" to="/contact">Contact</NuxtLink>
                 <NuxtLink @click="isMobileMenu = false"
                     class="text-blue-600 hover:scale-105 transition-transform duration-75" active-class="underline"
                     to="/cart">Cart</NuxtLink>
