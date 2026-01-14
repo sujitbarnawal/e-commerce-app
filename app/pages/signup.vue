@@ -37,7 +37,6 @@ const submitForm=async()=>{
             name:name.value,
             email:email.value,
             password:password.value,
-            image:null,
             address:{
                 line1:null,
                 line2:null

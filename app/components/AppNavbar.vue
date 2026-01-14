@@ -8,7 +8,7 @@ const { user, logout } = useAuth()
     <header class=" flex items-center h-[60px] sticky top-0 bg-white">
         <nav class="w-[90%] mx-auto flex items-center justify-between">
 
-            <p @click="navigateTo('/')" class="text-blue-600 text-xl font-bold cursor-pointer">Online Pasal</p>
+            <p  @click="navigateTo('/')" class="text-blue-600 text-xl font-bold cursor-pointer">Online Pasal</p>
             <div class="hidden md:flex items-center gap-4 text-lg ">
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
                     active-class="underline" to="/">Home</NuxtLink>
@@ -40,7 +40,7 @@ const { user, logout } = useAuth()
                             d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                     </svg>
                 </p>
-                <p class="text-white text-center bg-blue-600 w-1/2 rounded-lg p-1 text-sm" v-if="user">{{
+                <p @click="navigateTo('/my-profile')" class="cursor-pointer text-white text-center bg-blue-600 w-1/2 rounded-lg p-1 text-sm" v-if="user">{{
                     user?.name.split(' ')[0] }}</p>
                 <NuxtLink @click="isMobileMenu = false"
                     class="text-blue-600 hover:scale-105 transition-transform duration-75" active-class="underline"
@@ -65,7 +65,7 @@ const { user, logout } = useAuth()
             </div>
 
         </nav>
-        <p class="hidden md:flex bg-blue-600 w-5 h-5  items-center justify-center font-bold mr-4 text-white rounded-full p-5"
+        <p @click="navigateTo('/my-profile')" class="cursor-pointer hidden md:flex bg-blue-600 w-5 h-5  items-center justify-center font-bold mr-4 text-white rounded-full p-5"
             v-if="user">{{ user.name.charAt(0).toUpperCase() }}</p>
     </header>
 </template>

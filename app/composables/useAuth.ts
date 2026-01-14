@@ -2,7 +2,6 @@ export type User={
     name:string ,
     email:string,
     password:string,
-    image:string| null,
     address:{
         line1:string|null,
         line2:string|null
