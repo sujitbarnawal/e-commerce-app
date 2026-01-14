@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { renderSlot } from 'vue';
+
 const email = ref("");
 const password = ref("");
 const showPassword = ref(false)
+const loading=ref(false)
+const error = ref('')
 
 useSeoMeta({
     title: 'Login',
@@ -11,13 +15,41 @@ useSeoMeta({
 definePageMeta({
     layout:false
 })
+
+const {login}=useAuth()
+
+const submitForm=async()=>{
+    error.value=''
+    if( !email.value || !password.value){
+        error.value="All fields are required"
+        return
+    }
+    if(password.value.length<8){
+       error.value="Password must be at least 8 characters " 
+       return
+    }
+    try{
+        loading.value=true
+        await new Promise((res)=>setTimeout(res,1000))
+        await login({
+            email:email.value,
+            password:password.value
+        })
+
+    }catch(e){
+        console.log(e)
+    }finally{
+        loading.value=false
+    }
+}
+
 </script>
 
 <template>
     <section class="flex items-center justify-center min-h-[calc(100vh-100px)] bg-transparent">
-        <form class="bg-white shadow-xl rounded-2xl py-8 px-10 w-full max-w-md border border-gray-100">
+        <form @submit.prevent="submitForm" class="bg-white shadow-xl rounded-2xl py-8 px-10 w-full max-w-md border border-gray-100">
             <h1 class="text-center text-blue-600 text-3xl font-bold mb-8">Login</h1>
-
+            <div class="text-sm text-red-600 mt-2" v-if="error">{{ error }}</div>
             <div class="space-y-2">
                 <div>
                     <label class="block font-semibold text-gray-700 mb-2" for="email">Email</label>
@@ -39,9 +71,9 @@ definePageMeta({
                     </div>
                 </div>
 
-                <button type="submit"
+                <button type="submit" :disabled="loading"
                     class="w-full  bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 hover:scale-[1.02] transition-all  shadow-lg">
-                    Login
+                    {{loading?"Logging in...":"Login"}}
                 </button>
             </div>
 

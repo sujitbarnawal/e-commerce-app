@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const isMobileMenu = ref(false)
 const {cart}=useCart()
-
+const {user}=useAuth()
 </script>
 
 <template>
@@ -35,6 +35,7 @@ const {cart}=useCart()
                             d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                     </svg>
                 </p>
+                <p class="text-white text-center bg-blue-600 w-1/2 rounded-lg p-1 text-sm" v-if="user">{{ user?.name.split(' ')[0] }}</p>
                 <NuxtLink @click="isMobileMenu = false"
                     class="text-blue-600 hover:scale-105 transition-transform duration-75" active-class="underline"
                     to="/">Home</NuxtLink>
@@ -52,5 +53,6 @@ const {cart}=useCart()
             </div>
 
         </nav>
+        <p class="hidden md:flex bg-blue-600 w-5 h-5  items-center justify-center font-bold mr-4 text-white rounded-full p-5"  v-if="user">{{ user.name.charAt(0).toUpperCase() }}</p>
     </header>
 </template>

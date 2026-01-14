@@ -3,6 +3,8 @@ const name = ref("");
 const email = ref("");
 const password = ref("");
 const showPassword=ref(false)
+const loading=ref(false)
+const error = ref('')
 
 useSeoMeta({
     title: 'Signup',
@@ -11,29 +13,68 @@ useSeoMeta({
 definePageMeta({
     layout:false
 })
+
+const {signup}=useAuth()
+
+const submitForm=async()=>{
+    error.value=''
+    if(!name.value || !email.value || !password.value){
+        error.value="All fields are required"
+        return
+    }
+    if(name.value.length<3){
+        error.value="Name must be at least 3 letters"
+        return
+    }
+    if(password.value.length<8){
+       error.value="Password must be at least 8 characters " 
+       return
+    }
+    try {
+        loading.value=true
+        await new Promise((res)=>setTimeout(res,1000))
+        await signup({
+            name:name.value,
+            email:email.value,
+            password:password.value,
+            image:null,
+            address:{
+                line1:null,
+                line2:null
+            }
+        })
+    } catch (e) {
+        console.log(e)
+    } finally{
+        loading.value=false
+    }
+
+}
+
 </script>
 
 <template>
     <section class="flex items-center justify-center min-h-[calc(100vh-100px)] bg-transparent">
-        <form class="bg-white shadow-xl rounded-2xl py-8 px-10 w-full max-w-md border border-gray-100">
+        <form @submit.prevent="submitForm" class="bg-white shadow-xl rounded-2xl py-8 px-10 w-full max-w-md border border-gray-100">
             <h1 class="text-center text-blue-600 text-3xl font-bold mb-8">Signup</h1>
+            <div class="text-sm text-red-600 mt-2" v-if="error">{{ error }}</div>
 
             <div class="space-y-2">
                 <div>
                     <label class="block font-semibold text-gray-700 mb-2" for="name">Full Name</label>
-                    <input id="name" type="text" placeholder="Enter your name" v-model="name"
+                    <input  id="name" type="text" placeholder="Enter your name" v-model="name"
                         class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400">
                 </div>
                 <div>
                     <label class="block font-semibold text-gray-700 mb-2" for="email">Email</label>
-                    <input id="email" type="email" placeholder="Enter your email" v-model="email"
+                    <input  id="email" type="email" placeholder="Enter your email" v-model="email"
                         class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400">
                 </div>
                 <div>
                     <label class="block font-semibold text-gray-700 mb-2" for="password">Password</label>
                     <div class="relative">
 
-                        <input id="password" :type="showPassword ? 'text' : 'password'"
+                        <input  id="password" :type="showPassword ? 'text' : 'password'"
                             placeholder="Enter your passsword" v-model="password"
                             class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder:text-gray-400">
                         <button type="button" @click="showPassword=!showPassword"
@@ -44,9 +85,9 @@ definePageMeta({
                     </div>
                 </div>
 
-                <button type="submit"
+                <button type="submit" :disabled="loading"
                     class="w-full  bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 hover:scale-[1.02] transition-all  shadow-lg">
-                    Signup
+                    {{loading?"Signing up...": "Signup"}}
                 </button>
             </div>
 
