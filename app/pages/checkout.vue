@@ -5,6 +5,8 @@ const delivery_fee = computed(() => {
     return cartCount.value <= 2 ? 100 : 200
 })
 
+useSeo('Checkout',"Place your Order")
+
 </script>
 
 <template>

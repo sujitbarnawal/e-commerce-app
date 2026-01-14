@@ -3,7 +3,7 @@ useSeo("Home", "Visit the Online Pasal home page")
 </script>
 
 <template>
-    <section class="max-w-4xl mx-auto px-4 py-12 text-center md:pt-[12%]">
+    <section class="max-w-4xl mx-auto px-4 py-12 text-center max-md:mt-[50%] md:pt-[12%]">
         <h1 class="text-4xl font-bold text-gray-900 mb-6">
             तपाईंको आफ्नै डिजिटल पसल, <span class="text-blue-600">Online Pasal</span>
         </h1>

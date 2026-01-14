@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const isMobileMenu = ref(false)
+const {cart}=useCart()
 
 </script>
 
@@ -17,8 +18,8 @@ const isMobileMenu = ref(false)
                     active-class="underline" to="/products">Products</NuxtLink>
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
                     active-class="underline" to="/contact">Contact</NuxtLink>
-                <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
-                    active-class="underline" to="/cart">Cart</NuxtLink>
+                <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75 relative"
+                    active-class="underline" to="/cart">Cart <span v-if="cart.length>0" class="absolute bottom-3 left-7 text-7xl text-red-600">.</span></NuxtLink>
             </div>
             <p @click="isMobileMenu = true" class="md:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="blue">
@@ -46,8 +47,8 @@ const isMobileMenu = ref(false)
                 <NuxtLink @click="isMobileMenu = false" class="text-blue-600 hover:scale-105 transition-transform duration-75"
                     active-class="underline" to="/contact">Contact</NuxtLink>
                 <NuxtLink @click="isMobileMenu = false"
-                    class="text-blue-600 hover:scale-105 transition-transform duration-75" active-class="underline"
-                    to="/cart">Cart</NuxtLink>
+                    class="text-blue-600 hover:scale-105 transition-transform duration-75 relative" active-class="underline"
+                    to="/cart">Cart <span v-if="cart.length>0" class="absolute bottom-3 left-7 text-7xl text-red-600">.</span></NuxtLink>
             </div>
 
         </nav>
