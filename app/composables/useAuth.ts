@@ -35,7 +35,7 @@ export const useAuth = () => {
 
     const logout = async () => {
         user.value = null
-        cookie.value = null
+        // cookie.value = null
         await navigateTo('/login')
     }
 
