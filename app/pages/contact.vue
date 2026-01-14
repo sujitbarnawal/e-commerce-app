@@ -13,7 +13,7 @@ useSeo('Contact', 'How to contact us?')
 
         <section>
             <div class="max-w-7xl text-center mx-auto p-6">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Get in Touch</h1>
+                <h1 class="text-4xl text-blue-600 md:text-5xl font-bold  mb-6">Get in Touch</h1>
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Have questions? We'd love to hear
                     from
                     you. Send us a message and we'll respond as soon as possible.</p>
