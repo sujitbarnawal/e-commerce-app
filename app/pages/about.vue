@@ -4,9 +4,6 @@ import ganesh_img from "../assets/images/ganesh.jpeg"
 import roman_img from "../assets/images/roman.jpeg"
 
 useSeo('About Us',"All about the Online Pasal")
-definePageMeta({
-    middleware:'auth'
-})
 
 const stats = [
     { label: 'Happy Customers', value: '10K+' },

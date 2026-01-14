@@ -6,7 +6,8 @@ export type User = {
   address: {
     line1: string | null;
     line2: string | null;
-  };
+  },
+  phone:number|null
 };
 
 export const useAuth = () => {

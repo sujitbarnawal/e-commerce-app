@@ -20,11 +20,15 @@ useSeo('Checkout',"Place your Order")
 
         <div class="flex  flex-col gap-4">
             <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow ">
-                <h2 class="text-2xl font-semibold">Delivery Address</h2>
+                <div class="flex justify-between items-center">
+
+                    <h2 class="text-2xl font-semibold">Delivery Address</h2>
+                    <button @click="navigateTo('/my-profile')" class="text-white bg-blue-600 px-4 py-2 rounded-lg ">Change</button>
+                </div>
                 <p class="mt-2 text-xl">{{ user?.name }}</p>
                 <Address class="text-xl mt-2">{{ user?.address.line1 }}</Address>
                 <Address class="text-xl">{{ user?.address.line2 }}</Address>
-                <p class="text-lg mt-2">Phone: +977-9863404920</p>
+                <p v-if="user?.phone" class="text-lg mt-2">Phone: +977-{{user?.phone}}</p>
             </div>
             <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow ">
                 <h2 class="text-2xl font-semibold  ">Order Items</h2>

@@ -12,6 +12,7 @@ const { cart, addToCart, removeFromCart, cartTotal, cartCount } = useCart()
 <template>
     <section class="max-w-7xl mx-auto pb-20 px-4">
         <h1 class="text-center text-4xl font-bold mt-4 text-blue-600 ">Your Cart</h1>
+        <div v-if="cart.length<=0" class="text-3xl font-semibold flex flex-col"><p>Your Cart is Empty</p> <button @click="navigateTo('/products')" class="text-sm bg-blue-600 text-white px-3 py-2 mt-4 rounded-lg w-[150px]">View Catalog</button></div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 ">
             <div v-for="c in cart" :key="c.id" class="bg-white hover:shadow-md transition-shadow rounded-xl px-4">
                 <img :src="c.image" class="w-full cursor-pointer h-[200px] bg-cover rounded-xl rounded-b-none "

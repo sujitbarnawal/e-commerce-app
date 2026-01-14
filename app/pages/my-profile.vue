@@ -4,6 +4,7 @@ const name = ref(user.value?.name||'')
 const email = ref(user.value?.email||'')
 const address1 = ref(user.value?.address.line1||'')
 const address2 = ref(user.value?.address.line2||'')
+const phone=ref()
 const error = ref('')
 const loading = ref(false)
 
@@ -28,7 +29,8 @@ const updateProfile = async () => {
             address:{
                 line1:address1.value,
                 line2:address2.value
-            }
+            },
+            phone:phone.value
         }
         user.value=updatedData
         const cookie = useCookie<User | null>("auth_user")
@@ -62,6 +64,11 @@ useSeo(name.value!, 'View your profile')
             <div>
                 <label class="text-xl block mt-2 " for="name">Your Email</label>
                 <input placeholder="Enter your email" required="true" type="email" v-model="email"
+                    class="px-4 py-2 w-full border mt-2 text-xl focus:outline-none focus:ring rounded-lg">
+            </div>
+            <div>
+                <label class="text-xl block mt-2 " for="phone">Your Phone Number</label>
+                <input placeholder="Enter your phone number" required="true" type="number" v-model.number="phone"
                     class="px-4 py-2 w-full border mt-2 text-xl focus:outline-none focus:ring rounded-lg">
             </div>
             <div>

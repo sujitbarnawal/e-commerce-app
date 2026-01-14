@@ -5,9 +5,6 @@ const subject = ref("")
 const message = ref("")
 
 useSeo('Contact', 'How to contact us?')
-definePageMeta({
-    middleware:'auth'
-})
 
 </script>
 
