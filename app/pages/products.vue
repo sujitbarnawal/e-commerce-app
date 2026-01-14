@@ -2,6 +2,9 @@
 import type { Product } from '~/types/ProductType';
 
 useSeo('Products', 'Explore our products and shop now');
+definePageMeta({
+    middleware:'auth'
+})
 
 const { data: products, pending, error } = await useFetch<Product[]>('https://fakestoreapi.com/products');
 </script>

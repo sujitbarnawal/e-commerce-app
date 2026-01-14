@@ -7,6 +7,9 @@ const address2 = ref(user.value?.address.line2||'')
 const error = ref('')
 const loading = ref(false)
 
+definePageMeta({
+    middleware:'auth'
+})
 
 const updateProfile = async () => {
     error.value = ""

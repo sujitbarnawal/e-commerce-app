@@ -1,5 +1,8 @@
 <script setup lang="ts">
 useSeo("Home", "Visit the Online Pasal home page")
+definePageMeta({
+    middleware:'auth'
+})
 </script>
 
 <template>

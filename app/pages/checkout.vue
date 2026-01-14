@@ -5,6 +5,11 @@ const delivery_fee = computed(() => {
     return cartCount.value <= 2 ? 100 : 200
 })
 
+const {user}=useAuth()
+definePageMeta({
+    middleware:'auth'
+})
+
 useSeo('Checkout',"Place your Order")
 
 </script>
@@ -16,9 +21,9 @@ useSeo('Checkout',"Place your Order")
         <div class="flex  flex-col gap-4">
             <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow ">
                 <h2 class="text-2xl font-semibold">Delivery Address</h2>
-                <p class="mt-2 text-xl">Sujit Barnawal</p>
-                <Address class="text-xl mt-2">Tangal,Kathmandu</Address>
-                <Address class="text-xl">Bagmati Province</Address>
+                <p class="mt-2 text-xl">{{ user?.name }}</p>
+                <Address class="text-xl mt-2">{{ user?.address.line1 }}</Address>
+                <Address class="text-xl">{{ user?.address.line2 }}</Address>
                 <p class="text-lg mt-2">Phone: +977-9863404920</p>
             </div>
             <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow ">

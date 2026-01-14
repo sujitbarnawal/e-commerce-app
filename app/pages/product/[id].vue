@@ -4,6 +4,10 @@ import type { Product } from '~/types/ProductType';
 
 const route=useRoute()
 
+definePageMeta({
+    middleware:'auth'
+})
+
 
 const {data:product,pending,error}=await useFetch<Product>(`https://fakestoreapi.com/products/${route.params.id}`,{
     key:`product-${route.params.id}`

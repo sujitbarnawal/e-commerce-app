@@ -1,5 +1,8 @@
 <script setup lang="ts">
 useSeo('Cart', 'Your Saved Products')
+definePageMeta({
+    middleware:'auth'
+})
 
 const { cart, addToCart, removeFromCart, cartTotal, cartCount } = useCart()
 

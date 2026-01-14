@@ -11,7 +11,8 @@ useSeoMeta({
     description: 'Create account to connect with Online Pasal'
 });
 definePageMeta({
-    layout:false
+    layout:false,
+    middleware:'guest'
 })
 
 const {signup}=useAuth()

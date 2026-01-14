@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { renderSlot } from 'vue';
+
 
 const email = ref("");
 const password = ref("");
@@ -13,7 +13,8 @@ useSeoMeta({
 });
 
 definePageMeta({
-    layout:false
+    layout:false,
+    middleware:'guest'
 })
 
 const {login}=useAuth()
