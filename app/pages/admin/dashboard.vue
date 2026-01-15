@@ -5,5 +5,5 @@
 </script>
 
 <template>
-    products
+    dashboard
 </template>

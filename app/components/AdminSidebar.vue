@@ -1,7 +1,7 @@
 <template>
-    <section class="w-[300px] min-h-[calc(100vh-60px)] bg-white p-5">
-        <div class="ml-5 flex items-center gap-14 hover:border cursor-pointer justify-between mt-2 rounded-lg p-2">
-            <NuxtLink class="text-xl text-blue-600 font-semibold" to="/">Home</NuxtLink>
+    <section class="w-[100px] md:w-[300px] min-h-[calc(100vh-60px)] bg-white p-5">
+        <div @click="navigateTo('/admin')" class="ml-5 flex items-center gap-14 hover:border cursor-pointer justify-center md:justify-between mt-2 rounded-lg p-2">
+            <p class="hidden md:block text-xl text-blue-600 font-semibold" to="/">Home</p>
             <p class="bg-[#d6d6ed] p-2 rounded-full w-10"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
                     viewBox="0 -960 960 960" width="24px" fill="blue">
                     <path
@@ -9,8 +9,8 @@
                 </svg></p>
         </div>
 
-        <div class="ml-5 flex items-center gap-3 hover:border cursor-pointer justify-between mt-2 rounded-lg p-2">
-            <NuxtLink class="text-xl text-blue-600 font-semibold" to="/dashboard">Dashboard</NuxtLink>
+        <div  @click="navigateTo('/admin/dashboard')" class="ml-5 flex items-center gap-3 hover:border cursor-pointer justify-center md:justify-between mt-2 rounded-lg p-2">
+            <p class="hidden md:block text-xl text-blue-600 font-semibold" to="/dashboard">Dashboard</p>
             <p class="bg-[#d6d6ed] p-2 rounded-full w-10"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
                     viewBox="0 -960 960 960" width="24px" fill="blue">
                     <path
@@ -18,8 +18,8 @@
                 </svg></p>
         </div>
 
-        <div class="ml-5 flex items-center gap-7 hover:border cursor-pointer justify-between mt-2 rounded-lg p-2">
-            <NuxtLink class="text-xl text-blue-600 font-semibold" to="/products">Products</NuxtLink>
+        <div @click="navigateTo('/admin/products')" class="ml-5 flex items-center gap-7 hover:border cursor-pointer justify-center md:justify-between mt-2 rounded-lg p-2">
+            <p class="hidden md:block text-xl text-blue-600 font-semibold" to="/products">Products</p>
             <p class="bg-[#d6d6ed] p-2 rounded-full w-10"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
                     viewBox="0 -960 960 960" width="24px" fill="blue">
                     <path
