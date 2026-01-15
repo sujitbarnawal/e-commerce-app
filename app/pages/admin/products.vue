@@ -57,7 +57,7 @@ useSeo('Products', 'Addd products here')
 
 <template>
     <section class="md:p-6  ">
-        <button @click="navigateTo('/add-product')"
+        <button @click="navigateTo('/admin/add-product')"
             class="px-4 py-2 text-white rounded-lg text-xl font-bold bg-blue-600">Add Product</button>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
             <div v-for="product in products" :key="product.id" class="bg-white hover:shadow-md transition-shadow rounded-xl">
