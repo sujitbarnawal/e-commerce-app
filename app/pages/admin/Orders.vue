@@ -2,9 +2,9 @@
     definePageMeta({
         layout:'admin-layout'
     })
-    useSeo('Products','Addd products here')
+    useSeo('Orders','All orders')
 </script>
 
 <template>
-    Products
+    Orders
 </template>
