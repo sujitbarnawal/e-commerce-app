@@ -5,12 +5,14 @@ import AdminSidebar from '~/components/AdminSidebar.vue';
 </script>
 
 <template>
-  <div class="admin-container">
+  <div class="flex flex-col h-screen overflow-hidden">
     <AdminNavbar />
-    <div class="flex">
+
+    <div class="flex flex-1 overflow-hidden">
       <AdminSidebar />
-      <main>
-        <slot /> 
+
+      <main class="flex-1  overflow-y-auto p-4">
+        <slot />
       </main>
     </div>
   </div>

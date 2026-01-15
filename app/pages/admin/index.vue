@@ -5,7 +5,7 @@
     })
 </script>
 <template>
-  <div class="p-8 max-w-4xl mx-auto">
+  <div class="p-8 max-w-4xl">
     <h1 class="text-3xl text-center text-blue-600 font-bold mb-4">Admin Control Center</h1>
     <p class="text-gray-600 mb-6">Welcome back! Use this panel to manage your store's operations effectively.</p>
     
