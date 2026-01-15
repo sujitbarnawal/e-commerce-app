@@ -56,7 +56,7 @@ useSeo('Products', 'Addd products here')
 </script>
 
 <template>
-    <section class="p-6 min-h-[calc(100vh-60px)] ">
+    <section class="md:p-6  ">
         <button @click="navigateTo('/add-product')"
             class="px-4 py-2 text-white rounded-lg text-xl font-bold bg-blue-600">Add Product</button>
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">

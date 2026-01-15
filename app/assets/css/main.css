@@ -8,3 +8,8 @@
 body{
     background-color: aliceblue;
 }
+
+.hide-scrollbar::-webkit-scrollbar{
+    visibility: hidden;
+   
+}
