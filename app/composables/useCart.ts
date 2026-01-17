@@ -37,6 +37,15 @@ export const useCart = () => {
         cart.value = cart.value.filter((c) => c.id !== id)
     }
 
+    const removeOneFromCart = (id: number) => {
+    const index= cart.value.findIndex(c => c.id === id);
+    if (index === -1) return;
+
+    cart.value[index]!.quantity > 1
+      ? cart.value[index]!.quantity--
+      : cart.value.splice(index, 1);
+  };
+
     const cartCount = computed(() =>
         cart.value.reduce((total, item) => total + (item.quantity || 1), 0)
     )
@@ -45,5 +54,5 @@ export const useCart = () => {
         cart.value.reduce((total, item) => total + (item.quantity * Number(item.price)), 0)
     )
 
-    return { cart, addToCart, removeFromCart, cartCount, cartTotal }
+    return { cart, addToCart, removeFromCart,removeOneFromCart, cartCount, cartTotal }
 }

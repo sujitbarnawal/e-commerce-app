@@ -20,7 +20,7 @@ const { user, logout } = useAuth()
                     active-class="underline" to="/contact">Contact</NuxtLink>
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75 relative"
                     active-class="underline" to="/cart">Cart <span v-if="cart.length > 0"
-                        class="absolute bottom-3 left-7 text-7xl text-red-600">.</span></NuxtLink>
+                        class="absolute bottom-3 left-7 text-xs rounded-full px-1 text-white bg-red-600">{{cart.length}}</span></NuxtLink>
                 <p @click="logout" v-if="user"
                     class="text-blue-500 text-sm border-blue-500 border-2 flex items-center justify-center bg-white py-1 px-2 cursor-pointer rounded-xl">
                     Logout</p>
@@ -57,7 +57,7 @@ const { user, logout } = useAuth()
                 <NuxtLink @click="isMobileMenu = false"
                     class="text-blue-600 hover:scale-105 transition-transform duration-75 relative"
                     active-class="underline" to="/cart">Cart <span v-if="cart.length > 0"
-                        class="absolute bottom-3 left-7 text-7xl text-red-600">.</span></NuxtLink>
+                        class="absolute bottom-3 left-7 px-1 text-xs text-white bg-red-600 rounded-full">{{cart.length}}</span></NuxtLink>
                 <p @click="logout" v-if="user"
                     class="text-blue-500 text-sm w-1/2 border-blue-500 border-2 flex items-center justify-center bg-white py-1 px-2 cursor-pointer rounded-xl">
                     Logout</p>

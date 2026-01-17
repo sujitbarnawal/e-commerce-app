@@ -13,7 +13,7 @@ useSeoMeta({
 });
 
 definePageMeta({
-    layout:false,
+    layout:'auth',
     middleware:'guest'
 })
 
