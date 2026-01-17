@@ -4,7 +4,7 @@ const name = ref(user.value?.name||'')
 const email = ref(user.value?.email||'')
 const address1 = ref(user.value?.address.line1||'')
 const address2 = ref(user.value?.address.line2||'')
-const phone=ref()
+const phone=ref(user?.value?.phone|| null)
 const error = ref('')
 const loading = ref(false)
 

@@ -6,8 +6,8 @@ export type User = {
   address: {
     line1: string | null;
     line2: string | null;
-  },
-  phone:number|null
+  };
+  phone: number | null;
 };
 
 export const useAuth = () => {
@@ -47,7 +47,7 @@ export const useAuth = () => {
 
   const logout = async () => {
     user.value = null;
-    cookie.value = null
+    cookie.value = null;
     await navigateTo("/login");
   };
 
