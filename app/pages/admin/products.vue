@@ -50,7 +50,8 @@ const products = ref<Product[]>([
     }
 ])
 definePageMeta({
-    layout: 'admin-layout'
+    layout: 'admin-layout',
+    middleware:'admin-auth'
 })
 useSeo('Products', 'Addd products here')
 </script>

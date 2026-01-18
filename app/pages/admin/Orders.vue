@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import adminAuth from '~/middleware/adminAuth';
 
 definePageMeta({
-    layout: 'admin-layout'
+    layout: 'admin-layout',
+    middleware:adminAuth
 })
 useSeo('Orders', 'All orders')
 

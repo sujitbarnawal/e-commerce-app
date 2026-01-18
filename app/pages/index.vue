@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { user } = useAuth()
 useSeo("Home", "Visit the Online Pasal home page")
+
 </script>
 
 <template>
@@ -28,5 +29,7 @@ useSeo("Home", "Visit the Online Pasal home page")
                 Welcome, {{ user.name }}
             </NuxtLink>
         </div>
+        <NuxtLink  to="/admin/login" class="border mt-4 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-medium transition-transform hover:scale-105 inline-block">
+                Admin Login</NuxtLink>
     </section>
 </template>

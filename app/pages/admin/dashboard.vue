@@ -1,6 +1,7 @@
 <script setup lang="ts">
     definePageMeta({
-        layout:'admin-layout'
+        layout:'admin-layout',
+        middleware:'admin-auth'
     })
     useSeo('Dashboard','All stats about orders')
 </script>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
     useSeo('Admin','Explore the admin home page')
     definePageMeta({
-        layout:'admin-layout'
+        layout:'admin-layout',
+        middleware:'admin-auth'
     })
 </script>
 <template>

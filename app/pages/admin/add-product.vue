@@ -2,7 +2,8 @@
 import { ref } from 'vue'
 
 definePageMeta({
-    layout: 'admin-layout'
+    layout: 'admin-layout',
+    middleware:'admin-auth'
 })
 useSeo('Add-product', "Add the new products here")
 
