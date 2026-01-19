@@ -240,16 +240,16 @@ export const addToCart=(userId:string,productId:string):CartItem=>{
   return newCartItem
 }
 
-export const removeFromCart=(id:string,userId:string):boolean=>{
-  const index = cartItems.findIndex(item=>item.id===id && item.userId===userId)
+export const removeFromCart=(productId:string,userId:string):boolean=>{
+  const index = cartItems.findIndex(item=>item.productId===productId && item.userId===userId)
   if(index===-1){return false}
   cartItems.splice(index,1)
   return true
 
 }
 
-export const decreaseQuantityOfCartItem=(id:string,userId:string)=>{
-  const index=cartItems.findIndex(item=>item.id===id && item.userId===userId)
+export const decreaseQuantityOfCartItem=(productId:string,userId:string)=>{
+  const index=cartItems.findIndex(item=>item.productId===productId && item.userId===userId)
   if(index===-1){return false}
   if(cartItems[index].quantity>1){
     cartItems[index].quantity--
@@ -257,6 +257,14 @@ export const decreaseQuantityOfCartItem=(id:string,userId:string)=>{
     cartItems.splice(index,1)
   }
   return true
+}
+
+export const clearUserCart=(userId:string):void=>{
+  const userItems = cartItems.filter(item=>item.userId===userId)
+  userItems.forEach(item=>{
+    const index = cartItems.indexOf(item)
+    if(index>-1) cartItems.splice(index,1)
+  })
 }
 
 //helpers for orders
@@ -277,4 +285,8 @@ export const getUserOrders=(userId:string):Order[]=>{
 
 export const getOrderById=(id:string):Order|undefined=>{
   return orders.find(order=>order.id===id)
+}
+
+export const getAllOrders=():Order[]=>{
+  return orders
 }
