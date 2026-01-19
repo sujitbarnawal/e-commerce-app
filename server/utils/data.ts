@@ -162,10 +162,12 @@ export const createUser = (
   return newUser;
 };
 
-export const updateUser = (userData: User): User | undefined => {
+export const updateUser = (userData: User): User  => {
   const index = users.findIndex((u) => u.id === userData.id);
 
-  if (index === -1) return undefined;
+  if (index === -1) {
+    throw new Error("User not found")
+  }
 
   users[index] = {
     ...users[index],

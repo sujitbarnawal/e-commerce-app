@@ -1,9 +1,9 @@
 import { requireAuth, sanitizeUser } from "~~/server/utils/auth"
-import { findUserByEmail } from "~~/server/utils/data"
+import {  findUserById } from "~~/server/utils/data"
 
 export default defineEventHandler(async (event)=>{
     const auth = requireAuth(event)
-    const user = findUserByEmail(auth.userId)
+    const user = findUserById(auth.userId)
     if(!user){
         throw createError({
             statusCode:404,
