@@ -196,10 +196,10 @@ export const createProduct = (productData: Omit<Product, "id">): Product => {
   return newProduct;
 };
 
-export const updateProduct = (product: Product): Product | undefined => {
+export const updateProduct = (product: Product): Product => {
   const index = products.findIndex((p) => p.id === product.id);
   if (index === -1) {
-    return undefined;
+    throw new Error("Product not found");
   }
   products[index] = {
     ...products[index],
