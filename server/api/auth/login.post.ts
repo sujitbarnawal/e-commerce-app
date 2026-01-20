@@ -1,5 +1,5 @@
 import { generateToken, sanitizeUser } from "~~/server/utils/auth";
-import { findUserByEmail, findUserById } from "~~/server/utils/data";
+import { findUserByEmail } from "~~/server/utils/data";
 
 export default defineEventHandler(async(event)=>{
     const body = await readBody(event)
@@ -17,7 +17,19 @@ export default defineEventHandler(async(event)=>{
             statusMessage:"User not Found!"
         })
     }
+    if(existing.password!==password){
+        throw createError({
+            statusCode:400,
+            statusMessage:"Invalid Password!"
+        })
+    }
     const token = generateToken(existing.id)
+    setCookie(event, 'auth_token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24,
+  })
     return {
         success:true,
         data:{

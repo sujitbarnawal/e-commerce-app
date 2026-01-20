@@ -50,8 +50,12 @@ const addProduct = async () => {
       navigateTo('/admin/products')
     }
   } catch (error) {
-    console.error(error)
-    alert('Error occurred')
+    if(error instanceof Error){
+        alert(error.message)
+    }else{
+        alert("Error Occured")
+    }
+    
   }
 }
 

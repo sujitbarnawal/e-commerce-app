@@ -2,6 +2,7 @@
 const isMobileMenu = ref(false)
 const { cart } = useCart()
 const { user, logout } = useAuth()
+const logo = computed(() => user?.value?.name?.[0]?.toUpperCase() ?? '')
 </script>
 
 <template>
@@ -66,6 +67,6 @@ const { user, logout } = useAuth()
 
         </nav>
         <p @click="navigateTo('/my-profile')" class="cursor-pointer hidden md:flex bg-blue-600 w-5 h-5  items-center justify-center font-bold mr-4 text-white rounded-full p-5"
-            v-if="user">{{ user.name.charAt(0).toUpperCase() }}</p>
+            v-if="user">{{ logo }}</p>
     </header>
 </template>

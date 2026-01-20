@@ -1,21 +1,8 @@
-import { requireAdmin, requireAuth } from "~~/server/utils/auth";
-import {
-  deleteProduct,
-  findUserById
-} from "~~/server/utils/data";
+import { requireAdmin } from "~~/server/utils/auth";
+import { deleteProduct } from "~~/server/utils/data";
 
 export default defineEventHandler(async (event) => {
-  const auth = requireAuth(event);
-
-  const user = findUserById(auth.userId);
-  if (!user) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: "User not Found",
-    });
-  }
-
-  requireAdmin(event, user.role);
+  requireAdmin(event);
 
   const { id } = getRouterParams(event);
   if (!id) {

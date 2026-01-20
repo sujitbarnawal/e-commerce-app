@@ -1,18 +1,16 @@
-import { requireAdmin, requireAuth } from "~~/server/utils/auth"
-import { createProduct, findUserById } from "~~/server/utils/data"
+import { requireAdmin } from "~~/server/utils/auth"
+import { createProduct } from "~~/server/utils/data"
 
 export default defineEventHandler(async(event)=>{
-    const auth = requireAuth(event)
-    const user = findUserById(auth.userId)
-    if(!user){
-        throw createError({
-            statusCode:404,
-            statusMessage:"User not Found"
-        })
-    }
-    requireAdmin(event,user.role)
+    requireAdmin(event);
     const body = await readBody(event)
     const {title,description,category,image,price}=body
+    if(!title||!description||!category||!image||!price){
+        throw createError({
+            statusCode:400,
+            statusMessage:"All fields are required"
+        })
+    }
     const newProduct = createProduct({
         title,
         description,

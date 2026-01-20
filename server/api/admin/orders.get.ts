@@ -1,6 +1,5 @@
 import {
   requireAdmin,
-  requireAuth,
   sanitizeUser,
 } from "~~/server/utils/auth";
 import {
@@ -10,27 +9,7 @@ import {
 } from "~~/server/utils/data";
 
 export default defineEventHandler(async (event) => {
-
-  const auth = requireAuth(event);
-
-  if (!auth?.userId) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: "Unauthorized",
-    });
-  }
-
-  const user = findUserById(auth.userId);
-
-  if (!user) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: "User not found",
-    });
-  }
-
-
-  requireAdmin(event, user.role);
+requireAdmin(event);
 
 
   const orders = getAllOrders();

@@ -1,55 +1,50 @@
-import type { CartProduct } from "~/types/ProductType";
-export type User = {
-  name: string;
-  email: string;
-  password: string;
-  address: {
-    line1: string | null;
-    line2: string | null;
-  };
-  phone: number | null;
-};
+
 
 export const useAuth = () => {
-  const user = useState<User | null>("user", () => null);
-  const cookie = useCookie<User | null>("auth_user");
-
-  if (!user.value && cookie.value) {
-    user.value = cookie.value;
+  
+  const token = useCookie('auth_token')
+  const user = useCookie<any | null>('user_data')
+  
+  const signup=async(payload: {name:string, email: string; password: string })=>{
+    try{
+      const res:any =await $fetch('/api/auth/signup',{
+        method:'POST',
+        body:payload
+      })
+      if(res.success){
+        return navigateTo('/login')
+      }
+    }catch(err:any){
+        alert(err.data?.statusMessage || 'Signup failed')
+    }
   }
 
-  const signup = async (payload: User) => {
-    cookie.value = payload;
-    await navigateTo("/login");
-  };
+  const login = async (payload: { email: string; password: string }) => {
+    try {
+      const res: any = await $fetch('/api/auth/login', {
+        method: 'POST',
+        body: payload,
+      })
 
-  const login = async (payload: Partial<User>) => {
-    const savedUser = cookie.value;
-    if (
-      savedUser?.email === payload.email &&
-      savedUser?.password === payload.password
-    ) {
-      const guestCart = useCookie<CartProduct[]>("guest_cart");
-      if (guestCart.value && guestCart.value.length > 0) {
-        const userCartKey = `cart_${savedUser?.email}`;
-        const userCart = useCookie<CartProduct[]>(userCartKey);
+      user.value = res.data.user 
 
-        userCart.value = [...(userCart.value || []), ...guestCart.value];
-
-        guestCart.value = [];
-      }
-      user.value = savedUser;
-      await navigateTo("/");
-    } else {
-      alert("Invalid Credentials");
+      return navigateTo('/')
+    } catch (err: any) {
+      alert(err.data?.statusMessage || 'Login failed')
     }
-  };
+  }
 
   const logout = async () => {
-    user.value = null;
-    cookie.value = null;
-    await navigateTo("/login");
-  };
+    try {
+      await $fetch('/api/auth/logout', { method: 'POST' })
+    } catch (e) {
+      console.error("Logout request failed", e)
+    }
 
-  return { user, signup, login, logout };
-};
+    user.value = null
+    token.value = null
+    return navigateTo('/login')
+  }
+
+  return { signup, login, logout, user }
+}

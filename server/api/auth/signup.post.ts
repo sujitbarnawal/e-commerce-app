@@ -29,6 +29,12 @@ export default defineEventHandler(async (event) => {
     phone: null,
   });
   const token = generateToken(newUser.id);
+   setCookie(event, 'auth_token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24,
+  })
   return {
     success: true,
     data: {
