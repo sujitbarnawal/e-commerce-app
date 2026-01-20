@@ -11,14 +11,14 @@ export default defineEventHandler(async (event)=>{
         })
     }
     const body = await readBody(event)
-    const {name,email,phone,line1,line2}=body
+    const {name,email,phone,address}=body
     let userData = {...user,
         name:name??user.name,
         email:email??user.email,
         phone:phone??user.phone,
         address:{
-            line1:line1??user.address.line1,
-            line2:line2??user.address.line2,
+            line1:address?.line1??user.address?.line1,
+            line2:address?.line2??user.address?.line2,
         },
     }
     const updatedUser = updateUser(userData)

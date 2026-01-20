@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import type { Product } from '~/types/ProductType';
 
+
+
 useSeo('Products', 'Explore our products and shop now');
 definePageMeta({
     middleware:'auth'
 })
 
-const { data: products, pending, error } = await useFetch<Product[]>('https://fakestoreapi.com/products');
+const { data, pending, error } = await useFetch<{data:Product[]}>('/api/products',{
+    method:'GET'
+});
 </script>
 
 <template>
@@ -24,8 +28,8 @@ const { data: products, pending, error } = await useFetch<Product[]>('https://fa
             </div>
 
             <ProductList 
-                v-else-if="products" 
-                :products="products"
+                v-else-if="data?.data" 
+                :products="data?.data"
             />
 
             <div v-else class="text-center">
