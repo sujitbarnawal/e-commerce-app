@@ -45,8 +45,12 @@ export const requireAuth = (event: H3Event) => {
 
 export const requireAdmin = (event: H3Event) => {
   const admin = getAdminFromToken(event)
-  if (!admin || admin.role !== 'admin') {
-    throw createError({ statusCode: 403, statusMessage: "Forbidden - Admin access required" })
+  if(!admin?.userId){
+    throw createError("Admin not found!")
+  }
+  const adminUser = findUserById(admin?.userId)
+  if(adminUser?.role!=='admin'){
+    throw createError("Acess Forbidden")
   }
   return admin
 }

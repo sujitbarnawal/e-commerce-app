@@ -15,8 +15,8 @@ const {data,pending,error}=await useFetch('/api/admin/products',{
     <section class="md:p-6  ">
         <button @click="navigateTo('/admin/add-product')"
             class="px-4 py-2 text-white rounded-lg text-xl font-bold bg-blue-600">Add Product</button>
-        <div class="text-2xl" v-if="pending">Loading.....</div>    
-        <div class="text-2xl" v-else-if="error">Error Occured</div>    
+        <div class="text-2xl mt-2 font-semibold" v-if="pending">Loading.....</div>    
+        <div class="text-2xl mt-2 font-semibold" v-else-if="error">Error Occured</div>    
         <div v-else class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
             <div v-for="product in data?.data" :key="product.id" class="bg-white hover:shadow-md transition-shadow rounded-xl">
                 <img @click="navigateTo(`/admin/product/${product.id}`)" :src="product.image"
