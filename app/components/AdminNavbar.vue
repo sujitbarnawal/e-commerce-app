@@ -5,7 +5,7 @@
     <header class=" flex items-center h-[60px] sticky top-0 bg-white">
         <nav class="w-[90%] mx-auto flex items-center justify-between">
 
-            <h1 class="text-xl font-bold text-blue-600 ">Online Pasal</h1>
+            <h1 @click="navigateTo('/admin')" class="text-xl cursor-pointer font-bold text-blue-600 ">Online Pasal</h1>
             <div class="flex gap-2 items-center">
 
                 <p class="font-bold text-white bg-blue-600 rounded-[100%] px-3.5 py-2">A</p>

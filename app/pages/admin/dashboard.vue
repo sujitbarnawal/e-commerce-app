@@ -28,6 +28,10 @@
         <p class="text-sm text-gray-500 uppercase">Total Customers</p>
         <p class="text-3xl font-bold">{{ data?.data.stats.totalUsers }}</p>
       </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <p class="text-sm text-gray-500 uppercase">Total Products</p>
+        <p class="text-3xl font-bold">{{ data?.data.stats.totalProducts }}</p>
+      </div>
     </div>
     </div>
 </template>
