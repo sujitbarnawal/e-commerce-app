@@ -21,7 +21,7 @@ useSeo(props.product.title, 'Details of specific product')
 <template>
     <div class="">
         <h1 class="text-center text-4xl font-bold mb-10 mt-4 text-blue-600">{{ product.title }}</h1>
-        <div class="flex  flex-col lg:flex-row items-start gap-4">
+        <div class="flex  flex-col lg:flex-row  gap-4">
 
             <img class="max-lg:mx-auto" :src="product.image" alt="product_image">
             <div class="pt-20 flex flex-col">

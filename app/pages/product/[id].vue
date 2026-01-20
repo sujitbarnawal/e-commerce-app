@@ -9,11 +9,10 @@ definePageMeta({
 })
 
 
-const {data:product,pending,error}=await useFetch<Product>(`https://fakestoreapi.com/products/${route.params.id}`,{
+const {data,pending,error}=await useFetch<{data:Product}>(`/api/products/${route.params.id}`,{
     key:`product-${route.params.id}`
 })
 
-console.log(product)
 
 </script>
 
@@ -32,8 +31,8 @@ console.log(product)
             </div>
 
             <ProductDetail 
-                v-else-if="product" 
-                :product="product"
+                v-else-if="data?.data" 
+                :product="data.data"
             />
 
             <div v-else class="text-center">
