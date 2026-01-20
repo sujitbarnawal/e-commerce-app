@@ -1,30 +1,32 @@
 export const useAdminAuth = () => {
-    
-    const adminUser = {
-        name: 'Sujit',
-        email: "sujit@gmail.com"
-    }
+  const admin = useState<any>('admin', () => null)
+  const cookie =useCookie('admin_token')
+  if(!admin.value && cookie.value){
+    admin.value=cookie.value
+  }
 
-    const adminCookie = useCookie('admin')
+  const loginAdmin = async (payload: { email: string; password: string }) => {
+    try {
+      const res = await $fetch('/api/admin/login', {
+        method: 'POST',
+        body: payload,
+      })
 
-    const loginAdmin = async (payload: Partial<User>) => {
-        
-        if (payload.name === adminUser.name && payload.email === adminUser.email) {
-            adminCookie.value = JSON.stringify(adminUser)
-            await navigateTo('/admin')
-        } else {
-            alert("Invalid credentials")
-        }
+      admin.value = res.data.user
+      await navigateTo('/admin')
+    } catch (err: any) {
+      alert(err.statusMessage || 'Login failed')
     }
+  }
 
-    const logoutAdmin = async () => {
-        adminCookie.value = null
-        await navigateTo('/admin/login')
-    }
+  const logoutAdmin = async () => {
+    await $fetch('/api/admin/logout',{
+        method:'POST'
+    })
+    admin.value = null
+    await navigateTo('/admin/login')
+  }
 
-    return { 
-        loginAdmin, 
-        logoutAdmin, 
-        admin: adminCookie 
-    }
+
+  return { loginAdmin, logoutAdmin, admin }
 }

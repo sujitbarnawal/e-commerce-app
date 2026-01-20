@@ -18,11 +18,10 @@ export const verifyToken=(token:string):{userId:string}|null=>{
     }
 }
 
-export const getUserFromToken=(event:H3Event):{userId:string}|null=>{
-    const authHeader = getHeader(event,'authorization')
-    if(!authHeader || !authHeader.startsWith('Bearer')) return null
-    const token = authHeader.substring(7)
-    return verifyToken(token)
+export const getUserFromToken = (event: H3Event): { userId: string } | null => {
+  const token = getCookie(event, 'admin_token')
+  if (!token) return null
+  return verifyToken(token)
 }
 
 export const requireAuth=(event:H3Event)=>{

@@ -30,6 +30,12 @@ export default defineEventHandler(async (event) => {
     });
   }
   const token = generateToken(user.id)
+  setCookie(event, 'admin_token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24,
+  })
   return{
     success:true,
     data:{
