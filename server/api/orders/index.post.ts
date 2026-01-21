@@ -33,7 +33,8 @@ export default defineEventHandler(async (event) => {
   if (
     !shippingAddress.name ||
     !shippingAddress.phone ||
-    !shippingAddress.address?.line1
+    !shippingAddress.address?.line1||
+    !shippingAddress.address?.line2
   ) {
     throw createError({
       statusCode: 400,

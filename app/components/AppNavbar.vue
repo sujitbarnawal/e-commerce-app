@@ -19,6 +19,8 @@ const logo = computed(() => user?.value?.name?.[0]?.toUpperCase() ?? '')
                     active-class="underline" to="/products">Products</NuxtLink>
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
                     active-class="underline" to="/contact">Contact</NuxtLink>
+                <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75"
+                    active-class="underline" to="/my-orders">Orders</NuxtLink>
                 <NuxtLink class="text-blue-600 hover:scale-105 transition-transform duration-75 relative"
                     active-class="underline" to="/cart">Cart <span v-if="cart.length > 0"
                         class="absolute bottom-3 left-7 text-xs rounded-full px-1 text-white bg-red-600">{{cart.length}}</span></NuxtLink>
@@ -55,6 +57,8 @@ const logo = computed(() => user?.value?.name?.[0]?.toUpperCase() ?? '')
                 <NuxtLink @click="isMobileMenu = false"
                     class="text-blue-600 hover:scale-105 transition-transform duration-75" active-class="underline"
                     to="/contact">Contact</NuxtLink>
+                <NuxtLink @click="isMobileMenu=false" class="text-blue-600 hover:scale-105 transition-transform duration-75"
+                    active-class="underline" to="/my-orders">Orders</NuxtLink>    
                 <NuxtLink @click="isMobileMenu = false"
                     class="text-blue-600 hover:scale-105 transition-transform duration-75 relative"
                     active-class="underline" to="/cart">Cart <span v-if="cart.length > 0"

@@ -1,18 +1,59 @@
 <script setup lang="ts">
 const { cart, cartCount, cartTotal } = useCart()
 
+const loading=ref(false)
+const paymentMethod=ref('esewa')
+
 const delivery_fee = computed(() => {
     return cartCount.value <= 2 ? 100 : 200
 })
 
 const {user}=useAuth()
+const {clearCart}=useCart()
 definePageMeta({
     middleware:'auth'
 })
 
 useSeo('Checkout',"Place your Order")
 
-const placeOrder=async()=>{}
+const placeOrder = async () => {
+    if (!user.value?.name || !user.value?.phone || !user.value?.address?.line1) {
+        alert("Please complete your profile before placing an order")
+        await navigateTo('/my-profile')
+        return
+    }
+
+    loading.value = true
+
+    try {
+        const response = await $fetch('/api/orders', {
+            method: "POST",
+            body: {
+                paymentMethod: paymentMethod.value,
+                shippingAddress: {
+                    name: user.value.name,
+                    phone: user.value.phone,
+                    address: {
+                        line1: user.value.address.line1,
+                        line2: user.value.address.line2
+                    }
+                }
+            }
+        })
+
+        if (response.success) {
+            await clearCart()
+            
+            alert("Order placed successfully!")
+            await navigateTo('/my-orders')
+        }
+    } catch (error: any) {
+        console.error('Order placement failed:', error)
+        alert(error.data?.message || 'Failed to place order. Please try again.')
+    } finally {
+        loading.value = false
+    }
+}
 
 </script>
 
@@ -49,7 +90,7 @@ const placeOrder=async()=>{}
                     <div class="space-y-3">
                         <label
                             class="flex  items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 transition-colors">
-                            <input type="radio" name="payment" value="esewa" class="w-4 h-4 text-blue-600 " checked />
+                            <input v-model="paymentMethod" type="radio" name="payment" value="esewa" class="w-4 h-4 text-blue-600 " checked />
                             <div style="margin-left: 10px">
                                 <p class="font-medium text-gray-900">eSewa</p>
                                 <p class="text-sm text-gray-500">Pay securely with eSewa wallet</p>
@@ -58,7 +99,7 @@ const placeOrder=async()=>{}
                         </label>
                         <label
                             class="flex  items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 transition-colors">
-                            <input type="radio" name="payment" value="cod" class="w-4 h-4  text-blue-600" />
+                            <input v-model="paymentMethod" type="radio" name="payment" value="cod" class="w-4 h-4  text-blue-600" />
 
                             <div style="margin-left: 10px">
                                 <p class="font-medium text-gray-900">Cash on Delivery</p>
