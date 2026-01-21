@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
       statusMessage: "User not Found",
     });
   }
-  if (!user.password === password) {
+  if (user.password !== password) {
     throw createError({
       statusCode: 401,
       statusMessage: "Invalid credentials",
