@@ -46,7 +46,7 @@ const updateProfile = async () => {
                 }
             }
         })
-        const cookie = useCookie<User>('user_auth')
+        const cookie = useCookie<User>('user_data')
         cookie.value = {
             ...cookie.value,
             name: name.value,

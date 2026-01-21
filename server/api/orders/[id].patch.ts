@@ -1,15 +1,6 @@
 export default defineEventHandler(async (event) => {
-  const auth = requireAuth(event);
-  if (!auth?.userId) {
-    throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
-  }
 
-  const user = findUserById(auth.userId);
-  if (!user) {
-    throw createError({ statusCode: 404, statusMessage: "User not Found" });
-  }
-
-  requireAdmin(event, user.role);
+  requireAdmin(event);
 
   const { id } = getRouterParams(event);
   if (!id) {

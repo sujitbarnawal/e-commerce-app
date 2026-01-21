@@ -12,6 +12,8 @@ definePageMeta({
 
 useSeo('Checkout',"Place your Order")
 
+const placeOrder=async()=>{}
+
 </script>
 
 <template>
@@ -74,7 +76,7 @@ useSeo('Checkout',"Place your Order")
                 <p class="text-xl ">Delivery Fee: Rs.{{ Number(delivery_fee) }}</p>
                 <p class="text-lg mt-2 font-semibold">Total: Rs.{{ Number(cartTotal.toFixed()) + Number(delivery_fee) }}
                 </p>
-                <button
+                <button @click="placeOrder"
                     class="w-[200px] max-md:w-full bg-blue-600 mt-2 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors">
                     Place Order
                 </button>

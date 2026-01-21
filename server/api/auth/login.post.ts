@@ -23,6 +23,14 @@ export default defineEventHandler(async(event)=>{
             statusMessage:"Invalid Password!"
         })
     }
+    if(existing.role!=="user"){
+        throw createError(
+            {
+                statusCode:400,
+                statusMessage:"Only users are allowed"
+            }
+        )
+    }
     const token = generateToken(existing.id)
     setCookie(event, 'auth_token', token, {
     httpOnly: true,
