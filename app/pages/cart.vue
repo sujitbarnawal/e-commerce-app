@@ -21,7 +21,7 @@ const { cart, addToCart, removeFromCart, removeOneFromCart, cartTotal, cartCount
                 <img :src="c.image" class="w-full cursor-pointer h-[200px] bg-cover rounded-xl rounded-b-none "
                     alt="cart_product_image">
                 <div class="p-4">
-                    <p class="text-xl font-semibold">{{ c.title }}</p>
+                    <p class="text-xl font-semibold line-clamp-2 min-h-[3.5rem]">{{ c.title }}</p>
                     <p class="text-lg">Price: Rs.{{ c.price }}</p>
                     <p class="text-lg">Quantity: {{ c.quantity }}</p>
 
