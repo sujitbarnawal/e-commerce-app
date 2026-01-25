@@ -5,6 +5,7 @@ const title = ref('')
 const description = ref('')
 const price = ref()
 const category = ref('')
+const loading=ref(false)
 
 definePageMeta({
     layout: 'admin-layout',
@@ -32,31 +33,34 @@ const removeImage = () => {
     if (fileInput.value) fileInput.value.value = ''
 }
 const addProduct = async () => {
-  try {
-    const res = await $fetch('/api/products', {
-      method: 'POST',
-      credentials: 'include',
-      body: {
-        title: title.value,
-        description: description.value,
-        price: price.value,
-        category: category.value,
-        image: imageUrl.value,
-      },
-    })
+    if (!fileInput.value?.files?.[0]) {
+        alert("Image required")
+        return
+    }
 
-    if (res.success) {
-      alert('Product added successfully')
-      navigateTo('/admin/products')
+    const formData = new FormData()
+    formData.append("title", title.value)
+    formData.append("description", description.value)
+    formData.append("price", price.value)
+    formData.append("category", category.value)
+    formData.append("image", fileInput.value.files[0])
+
+    try {
+        loading.value=true
+        const res = await $fetch('/api/products', {
+            method: 'POST',
+            body: formData,
+            credentials: 'include',
+        })
+        if(res.success){
+            alert(res.message)
+        }
+        navigateTo('/admin/products')
+    } catch (err: any) {
+        alert(err.message || "Error")
+    } finally{
+        loading.value=false
     }
-  } catch (error) {
-    if(error instanceof Error){
-        alert(error.message)
-    }else{
-        alert("Error Occured")
-    }
-    
-  }
 }
 
 </script>
@@ -122,9 +126,9 @@ const addProduct = async () => {
                 <textarea v-model="description" rows="4" placeholder="Enter description..."
                     class="px-4 py-2 w-full mt-1 focus:outline-none focus:ring-2 focus:ring-blue-100 border rounded-lg transition-all"></textarea>
 
-                <button type="submit"
+                <button type="submit" :disabled="loading"
                     class="w-full md:w-auto px-6 py-3 mt-4 text-white rounded-lg text-md font-bold bg-blue-600 hover:bg-blue-700 transition-colors">
-                    Add Product
+                    {{loading?"Adding...":"Add Product"}}
                 </button>
             </div>
         </form>

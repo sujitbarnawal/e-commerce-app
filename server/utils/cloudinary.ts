@@ -1,19 +1,25 @@
 import { v2 as cloudinary } from "cloudinary"
-const config = useRuntimeConfig()
+import * as dotenv from "dotenv"
 
+dotenv.config()
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
+  api_key: process.env.CLOUDINARY_API_KEY!,
+  api_secret: process.env.CLOUDINARY_API_SECRET!,
+})
 
-cloudinary.config(`CLOUDINARY_URL=cloudinary://${config.cloudinaryApiKey}:${config.cloudinaryApiSecret}@dxxfezfdr`);
-
-export const uploadImage = async (base64Image: string) => {
-  try {
-    const result = await cloudinary.uploader.upload(base64Image, {
-      folder: "online_pasal",
-      resource_type: "image",
-    });
-    return result.secure_url;
-  } catch (err) {
-    console.error("Cloudinary error:", err);
-    throw err;
-  }
-};
+export const uploadImage = async (buffer: Buffer): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload_stream(
+      {
+        folder: "online_pasal",
+        resource_type: "image",
+      },
+      (error, result) => {
+        if (error) return reject(error)
+        resolve(result!.secure_url)
+      }
+    ).end(buffer)
+  })
+}
