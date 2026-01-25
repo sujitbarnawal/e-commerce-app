@@ -1,14 +1,12 @@
 export interface Product{
-    id:number,
+    id:string,
     title:string,
     price:string,
     description:string,
     category:string,
     image:string,
-    rating:{
-        rate:number,
-        count:number
-    }
+    rating_count:number|null,
+    rating_rate:number|null
 }
 
 export interface CartProduct extends Product {

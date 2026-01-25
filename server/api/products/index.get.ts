@@ -1,8 +1,9 @@
-import { products } from "~~/server/utils/data";
+import { db } from "~~/server/database";
+import { products } from "~~/server/database/schema";
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  let filteredProducts = [...products];
+  let filteredProducts = await db.select().from(products);
   if (query.category) {
     filteredProducts = filteredProducts.filter(
       (p) => p.category === query.category,

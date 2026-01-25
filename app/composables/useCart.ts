@@ -1,20 +1,5 @@
 
-export interface Product {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  category: string;
-  image: string;
-  rating: {
-    count: number;
-    rate: number;
-  };
-}
-
-export interface CartProduct extends Product {
-  quantity: number;
-}
+import type {Product,CartProduct} from "../types/ProductType"
 
 export const useCart = () => {
     const { user } = useAuth()

@@ -23,9 +23,9 @@ const handleAddToCart = () => {
         <div class="p-4">
             <p class="text-xl font-semibold line-clamp-2 min-h-[3.5rem]">{{ product.title }}</p>
             <p class="text-lg">Price: Rs.{{ product.price }}</p>
-            <p class="text-lg">Ratings: {{ product.rating.count }}</p>
+            <p class="text-lg">Ratings: {{ product.rating_count }}</p>
             <div class="flex mb-4">
-                <span v-for="i in 5" :key="i" :class="i <= product.rating.rate ? 'text-yellow-400' : ''">★</span>
+                <span v-for="i in 5" :key="i" :class="i <= product.rating_rate! ? 'text-yellow-400' : ''">★</span>
             </div>
             <button @click="handleAddToCart"
                 :class="isAdded?'bg-green-600':'bg-blue-600'"
