@@ -1,5 +1,8 @@
+import { db } from "../database"
 import { User } from "./data"
 import { H3Event } from 'h3'
+import {users} from "../database/schema"
+import { eq } from "drizzle-orm"
 
 export const generateToken = (userId: string, role?: string): string => {
   return Buffer.from(JSON.stringify({
@@ -43,14 +46,14 @@ export const requireAuth = (event: H3Event) => {
   return user
 }
 
-export const requireAdmin = (event: H3Event) => {
+export const requireAdmin =async (event: H3Event) => {
   const admin = getAdminFromToken(event)
   if(!admin?.userId){
-    throw createError("Admin not found!")
+    throw createError({statusCode:400,statusMessage:"Admin not found!"})
   }
-  const adminUser = findUserById(admin?.userId)
+  const [adminUser] =await db.select().from(users).where(eq(users.id,admin?.userId))
   if(adminUser?.role!=='admin'){
-    throw createError("Acess Forbidden")
+    throw createError({statusCode:403,statusMessage:"Acess Forbidden"})
   }
   return admin
 }
