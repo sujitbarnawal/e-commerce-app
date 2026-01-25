@@ -1,6 +1,7 @@
 
-import { findProductById } from "~~/server/utils/data"
-
+import { db } from "~~/server/database"
+import {products} from "../../database/schema"
+import { eq } from "drizzle-orm"
 export default defineEventHandler(async(event)=>{
     const {id} = getRouterParams(event)
     if(!id){
@@ -9,7 +10,7 @@ export default defineEventHandler(async(event)=>{
             statusMessage:"ProductId is required"
         })
     }
-    const product = findProductById(id)
+    const [product] = await db.select().from(products).where(eq(products.id,id))
     if(!product){
         throw createError({
             statusCode:404,

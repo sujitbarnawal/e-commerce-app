@@ -18,10 +18,10 @@ const deleteProduct = async () => {
             credentials: 'include',
             method: 'DELETE'
         })
-        if(res.success){
+        if (res.success) {
             alert(res.message)
             navigateTo('/admin/products')
-        }else{
+        } else {
             alert('Error occured')
         }
 
@@ -40,8 +40,9 @@ const deleteProduct = async () => {
             <h1 class="text-center text-4xl font-bold mb-10 mt-4 text-blue-600">{{ data?.data.title }}</h1>
             <div class="flex  flex-col lg:flex-row items-start gap-4">
 
-                <img class="max-lg:mx-auto" :src="data?.data.image" alt="product_image">
-                <div class="pt-20 flex flex-col">
+                <img class="max-lg:mx-auto w-[220px] h-[220px] object-cover rounded-lg" :src="data?.data.image"
+                    alt="product_image" />
+                <div class="flex flex-col">
                     <p class="text-2xl font-semibold">{{ data?.data.description }}</p>
                     <p class="mt-4 text-2xl font-semibold">Category: <span class="text-gray-600 font-light">{{
                         data?.data.category }}</span></p>
@@ -49,13 +50,13 @@ const deleteProduct = async () => {
                         data?.data.price
                             }}</span></p>
                     <p class="mt-2 text-2xl font-semibold">Ratings: <span class="text-gray-600 font-light"> {{
-                        data?.data.rating.count }}</span></p>
+                        data?.data.rating_count }}</span></p>
                     <div class="flex mt-2 text-4xl">
-                        <span v-for="i in 5" :class="i <= data?.data.rating.rate! ? 'text-yellow-400' : ''">★</span>
+                        <span v-for="i in 5" :class="i <= data?.data.rating_rate! ? 'text-yellow-400' : ''">★</span>
                     </div>
                 </div>
             </div>
-            <div class="flex-row  flex mt-2 gap-4">
+            <div class="flex-row  flex mt-4 gap-4">
                 <button @click="navigateTo(`/admin/product/update/${data?.data.id}`)"
                     class="px-4 py-2 text-white rounded-lg text-xl font-bold bg-blue-600">Edit</button>
                 <button @click="deleteProduct"
