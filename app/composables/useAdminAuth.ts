@@ -12,7 +12,7 @@ export const useAdminAuth = () => {
         body: payload,
       })
 
-      admin.value = res.data.user
+      admin.value = res.user
       await navigateTo('/admin')
     } catch (err: any) {
       alert(err.statusMessage || 'Login failed')

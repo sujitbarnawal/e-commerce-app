@@ -5,15 +5,19 @@ import {
   text,
   timestamp,
   integer,
+  pgEnum,
+  bigint
 } from "drizzle-orm/pg-core";
+
+export const roleEnum = pgEnum("role",["admin","user"])
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   password: text("password").notNull(),
-  role: varchar("role", { length: 20 }).notNull().default("user"),
-  phone: varchar("phone", { length: 20 }),
+  role: roleEnum("role").notNull().default("user"),
+  phone: bigint("phone", { mode: "number" }),
   address_line1: text("address_line1"),
   address_line2: text("address_line2"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -70,3 +74,5 @@ export const orderItems = pgTable("orderItems", {
   quantity: integer("quantity").notNull(),
   price: integer("price").notNull(),
 });
+
+

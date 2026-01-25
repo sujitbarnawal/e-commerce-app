@@ -9,7 +9,7 @@ export interface User {
     line2: string | null;
   };
   phone: number | null;
-  createdAt: string | null;
+  createdAt: Date | null;
 }
 
 export interface Product {
@@ -61,7 +61,7 @@ export const users: User[] = [
     password: "admin123",
     name: "Admin User",
     role: "admin",
-    createdAt: new Date().toISOString(),
+    createdAt: new Date(),
     address: {
       line1: null,
       line2: null,
@@ -74,7 +74,7 @@ export const users: User[] = [
     password: "sujitsujit",
     name: "Sujit Barnawal",
     role: "user",
-    createdAt: new Date().toISOString(),
+    createdAt: new Date(),
     address: {
       line1: "Tangal,Kathmandu",
       line2: "Bagmati",
@@ -155,7 +155,7 @@ export const createUser = (
   const newUser: User = {
     ...userData,
     id: String(users.length + 1),
-    createdAt: new Date().toISOString(),
+    createdAt: new Date(),
     role: "user",
   };
   users.push(newUser);

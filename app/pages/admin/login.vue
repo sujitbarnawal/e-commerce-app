@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 
-const email = ref("admin@onlinepasal.com");
+const email = ref("admin@gmail.com");
 const password = ref("");
 const loading = ref(false)
 const error = ref('')
@@ -75,7 +75,7 @@ const submitForm = async () => {
                     class="w-full  bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 hover:scale-[1.02] transition-all  shadow-lg">
                     {{ loading ? "Logging in..." : "Login" }}
                 </button>
-                <p class="mt-2 text-sm">password: admin123</p>
+                <p class="mt-2 text-sm">password: adminadminsujit</p>
             </div>
 
            
