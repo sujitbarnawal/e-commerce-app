@@ -50,7 +50,7 @@ export const orders = pgTable("orders", {
   userId: uuid("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  total: integer("total"),
+  total: integer("total").default(0),
   status: text("status").notNull(),
   paymentMethod: text("paymentMethod").notNull(),
   shippingName: text("shipping_name").notNull(),
