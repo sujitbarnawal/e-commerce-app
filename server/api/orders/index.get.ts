@@ -4,13 +4,12 @@ import { orders, orderItems, products } from "~~/server/database/schema";
 import { requireAuth } from "~~/server/utils/auth";
 
 export default defineEventHandler(async (event) => {
-  // ---------------- AUTH ----------------
+
   const auth = requireAuth(event);
   if (!auth?.userId) {
     throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
   }
 
-  // ---------------- FETCH ORDERS ----------------
   const userOrders = await db
     .select()
     .from(orders)
@@ -21,7 +20,6 @@ export default defineEventHandler(async (event) => {
     return { success: true, data: [] };
   }
 
-  // ---------------- FETCH ITEMS WITH PRODUCTS ----------------
   const ordersWithItems = [];
 
   for (const order of userOrders) {
