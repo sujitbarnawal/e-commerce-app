@@ -1,5 +1,8 @@
+import { db } from "~~/server/database";
 import { requireAuth } from "~~/server/utils/auth";
-import { clearUserCart } from "~~/server/utils/data";
+import { cartItems } from "~~/server/database/schema";
+import { eq } from "drizzle-orm";
+import { clear } from "node:console";
 
 export default defineEventHandler(async (event) => {
   const auth = requireAuth(event);
@@ -11,7 +14,13 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  clearUserCart(auth.userId);
+  const cleared = await db.delete(cartItems).where(eq(cartItems.userId,auth.userId)).returning()
+  if(!cleared){
+    throw createError({
+      statusCode:400,
+      statusMessage:"Cart not cleared, Error Occured!"
+    })
+  }
 
   return {
     success: true,
