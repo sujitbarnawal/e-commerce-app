@@ -1,5 +1,7 @@
+import { and, eq } from "drizzle-orm";
+import { db } from "~~/server/database";
+import { products,cartItems } from "~~/server/database/schema";
 import { requireAuth } from "~~/server/utils/auth";
-import { addToCart, findProductById } from "~~/server/utils/data";
 
 export default defineEventHandler(async (event) => {
   const auth = requireAuth(event);
@@ -18,7 +20,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const product = findProductById(productId);
+  const [product] = await db.select().from(products).where(eq(products.id,productId));
   if (!product) {
     throw createError({
       statusCode: 404,
@@ -26,7 +28,18 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const cartItem = addToCart(auth.userId,productId)
+  let cartItem;
+
+  const [existing] = await db.select().from(cartItems).where(and(eq(cartItems.productId, productId),eq(cartItems.userId, auth.userId)))
+  if(existing){
+    [cartItem] = await db.update(cartItems).set({quantity:existing.quantity+1}).where(and(eq(cartItems.productId, productId),eq(cartItems.userId, auth.userId))).returning()
+  }else{
+    [cartItem]= await db.insert(cartItems).values({
+      userId:auth.userId,
+      productId,
+      quantity:1
+    }).returning()
+  }
   return {
     success:true,
     data:cartItem
