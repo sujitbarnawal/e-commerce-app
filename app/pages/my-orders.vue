@@ -129,7 +129,7 @@ const getPaymentMethodLabel = (method: string) => {
                         </div>
                         <div>
                             <p class="text-sm text-gray-600 mb-1">Order Date</p>
-                            <p class="text-lg font-medium text-gray-900">{{ formatDate(order.createdAt) }}</p>
+                            <p class="text-lg font-medium text-gray-900">{{ formatDate(order.createdAt!) }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-600 mb-2">Status</p>
@@ -173,10 +173,10 @@ const getPaymentMethodLabel = (method: string) => {
                     <div>
                         <h4 class="font-semibold text-lg mb-3 text-gray-800">Shipping Address</h4>
                         <div class="space-y-1 text-gray-700">
-                            <p class="font-medium">{{ order.shippingAddress.name }}</p>
-                            <p>{{ order.shippingAddress.address.line1 }}</p>
-                            <p>{{ order.shippingAddress.address.line2 }}</p>
-                            <p class="mt-2">Phone: +977-{{ order.shippingAddress.phone }}</p>
+                            <p class="font-medium">{{ order.shippingName }}</p>
+                            <p>{{ order.addressLine1 }}</p>
+                            <p>{{ order.addressLine2 }}</p>
+                            <p class="mt-2">Phone: +977-{{ order.shippingPhone }}</p>
                         </div>
                     </div>
                     <div>
@@ -188,7 +188,7 @@ const getPaymentMethodLabel = (method: string) => {
                             </p>
                             <div class="pt-3 border-t border-gray-300">
                                 <p class="text-2xl font-bold text-blue-600">
-                                    Total: Rs. {{ order.total.toFixed(2) }}
+                                    Total: Rs. {{ order.total!.toFixed(2) }}
                                 </p>
                             </div>
                         </div>

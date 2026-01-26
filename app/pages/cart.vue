@@ -26,7 +26,7 @@ const { cart, addToCart, removeFromCart, removeOneFromCart, cartTotal, cartCount
                     <p class="text-lg">Quantity: {{ c.quantity }}</p>
 
                 </div>
-                <div class="flex items-center justify-between gap-3 bg-gray-100 px-3 py-2 rounded-xl w-full">
+                <div class="flex items-center justify-between gap-3 px-3 py-2 rounded-xl w-full">
                     <button @click="removeOneFromCart(c.id)" class="flex items-center justify-center w-8 h-8 rounded-lg
                bg-red-500 hover:bg-red-600 text-white text-lg font-bold
                transition-all duration-200 active:scale-95">

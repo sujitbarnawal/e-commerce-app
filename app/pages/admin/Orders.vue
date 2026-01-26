@@ -56,7 +56,7 @@ const { data: ordersData, pending, error, refresh } = await useFetch('/api/admin
   method: 'GET'
 })
 
-const orders = computed<Order[]>(() => ordersData.value?.data || [])
+const orders = computed(() => ordersData.value?.data || [])
 
 const updatingStatus = ref<Record<string, boolean>>({})
 
@@ -110,7 +110,7 @@ const formatDate = (dateString: string) => {
 }
 
 const totalRevenue = computed(() =>
-  orders.value.reduce((sum, order) => sum + order.total, 0)
+  orders.value.reduce((sum, order) => sum + order.total!, 0)
 )
 </script>
 
@@ -135,10 +135,7 @@ const totalRevenue = computed(() =>
     <div v-else-if="error" class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
       <p class="text-red-600 text-lg font-semibold mb-2">Failed to load orders</p>
       <p class="text-red-500 mb-4">{{ error.message }}</p>
-      <button
-        @click="handleRefresh"
-        class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg"
-      >
+      <button @click="handleRefresh" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg">
         Try Again
       </button>
     </div>
@@ -172,14 +169,14 @@ const totalRevenue = computed(() =>
                 <p class="text-xs text-gray-500">{{ order.user?.email || 'N/A' }}</p>
               </td>
 
-              <td class="px-6 py-4">{{ order.items.length }} items</td>
+              <td class="px-6 py-4">{{ order.itemsWithProducts.length }} items</td>
 
               <td class="px-6 py-4 text-sm text-gray-500">
-                {{ formatDate(order.createdAt) }}
+                {{ formatDate(order.createdAt!) }}
               </td>
 
               <td class="px-6 py-4 font-bold">
-                Rs.{{ order.total.toFixed(2) }}
+                Rs.{{ order.total!.toFixed(2) }}
               </td>
 
               <td class="px-6 py-4 text-sm capitalize">
@@ -187,26 +184,16 @@ const totalRevenue = computed(() =>
               </td>
 
               <td class="px-6 py-4">
-                <span
-                  :class="getStatusClass(order.status)"
-                  class="px-3 py-1 rounded-full text-xs font-bold capitalize"
-                >
+                <span :class="getStatusClass(order.status)" class="px-3 py-1 rounded-full text-xs font-bold capitalize">
                   {{ order.status }}
                 </span>
               </td>
 
               <td class="px-6 py-4">
-                <select
-                  :value="order.status"
-                  :disabled="updatingStatus[order.id]"
-                  @change="(e) =>
-                    updateOrderStatus(
-                      order.id,
-                      (e.target as HTMLSelectElement).value as OrderStatus
-                    )
-                  "
-                  class="text-xs border rounded-lg p-1.5 bg-white disabled:bg-gray-100"
-                >
+                <select :value="order.status" :disabled="updatingStatus[order.id]" @change="(e) => {
+                  const value = (e.target as HTMLSelectElement).value as OrderStatus;
+                  updateOrderStatus(order.id, value);
+                }" class="text-xs border rounded-lg p-1.5 bg-white disabled:bg-gray-100">
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
                   <option value="shipped">Shipped</option>
@@ -225,10 +212,7 @@ const totalRevenue = computed(() =>
     </div>
 
     <div v-if="orders.length > 0" class="mt-6 text-center">
-      <button
-        @click="handleRefresh"
-        class="bg-white border-2 border-blue-600 text-blue-600 px-6 py-2 rounded-lg"
-      >
+      <button @click="handleRefresh" class="bg-white border-2 border-blue-600 text-blue-600 px-6 py-2 rounded-lg">
         Refresh Orders
       </button>
     </div>

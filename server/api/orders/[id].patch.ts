@@ -1,3 +1,7 @@
+import { eq } from "drizzle-orm";
+import { db } from "~~/server/database";
+import { orders } from "~~/server/database/schema";
+
 export default defineEventHandler(async (event) => {
 
   requireAdmin(event);
@@ -9,8 +13,8 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Order Id is required",
     });
   }
-
-  const order = orders.find((o) => o.id === id);
+  
+  const order = await db.select().from(orders).where(eq(orders.id,id));
   if (!order) {
     throw createError({ statusCode: 404, statusMessage: "Order not Found" });
   }
@@ -36,7 +40,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  order.status = status;
+  await db.update(orders).set({status:status}).where(eq(orders.id,id))
 
   return {
     success: true,
