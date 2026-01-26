@@ -1,5 +1,7 @@
+import { eq } from "drizzle-orm";
+import { db } from "~~/server/database";
+import { products } from "~~/server/database/schema";
 import { requireAdmin } from "~~/server/utils/auth"
-import { findProductById, updateProduct } from "~~/server/utils/data"
 
 export default defineEventHandler(async (event) => {
   requireAdmin(event);
@@ -12,7 +14,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const product = findProductById(id)
+  const [product] = await db.select().from(products).where(eq(products.id,id))
   if (!product) {
     throw createError({
       statusCode: 404,
@@ -20,19 +22,38 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const body = await readBody(event)
-  const { title, description, price, category, image } = body
+  const formData = await readMultipartFormData(event);
+  if (!formData) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Invalid form data",
+    });
+  }
+
+  const getField = (name: string) =>
+    formData.find((f) => f.name === name)?.data?.toString();
+
+  const imageFile = formData.find((f) => f.name === "image");
+
+  const title = getField("title");
+  const description = getField("description");
+  const category = getField("category");
+  const price = Number(getField("price"));
+  let image_url: string | undefined
+
+  if(imageFile?.data){
+     image_url = await uploadImage(imageFile.data)
+  }
 
   const productData = {
-    ...product, 
     title: title ?? product.title,
     description: description ?? product.description,
     price: price ?? product.price,
     category: category ?? product.category,
-    image: image ?? product.image,
+    image: image_url ?? product.image,
   }
 
-  const updatedProduct = updateProduct(productData)
+  const [updatedProduct] = await db.update(products).set(productData).where(eq(products.id,id)).returning()
 
   return {
     success: true,

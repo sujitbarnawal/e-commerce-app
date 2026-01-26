@@ -4,6 +4,17 @@ definePageMeta({
   middleware: 'admin-auth'
 })
 
+type UpdateProductResponse = {
+  success: boolean
+  data: {
+    title: string
+    description: string
+    price: number
+    category: string
+    image: string
+  }
+}
+
 const route = useRoute()
 const id = route.params.id as string
 
@@ -11,6 +22,9 @@ const { data, pending, error } = await useFetch(`/api/products/${id}`, {
   credentials: 'include'
 })
 
+
+const loading = ref(false)
+const fileInput=ref()
 
 const title = ref('')
 const description = ref('')
@@ -35,23 +49,27 @@ watchEffect(() => {
 
 const onImageChange = (e: Event) => {
   const file = (e.target as HTMLInputElement).files?.[0]
+  fileInput.value=file
   if (!file) return
 
   imagePreview.value = URL.createObjectURL(file)
 }
 
 const updateForm = async () => {
+  const formData = new FormData()
+  formData.append("title",title.value)
+  formData.append("description",description.value)
+  formData.append("price", String(price.value))
+  formData.append("category",category.value)
+  if(fileInput.value){
+    formData.append("image",fileInput.value)
+  }
   try {
-    const res = await $fetch(`/api/products/${id}`, {
+    loading.value = true
+    const res = await $fetch<UpdateProductResponse>(`/api/products/${id}`, {
       method: 'PUT',
       credentials: 'include',
-      body: {
-        title: title.value,
-        description: description.value,
-        price: price.value,
-        category: category.value,
-        image: imagePreview.value, 
-      },
+      body: formData
     })
 
     title.value = res.data.title
@@ -64,6 +82,8 @@ const updateForm = async () => {
   } catch (err) {
     console.error(err)
     alert('Update failed')
+  } finally{
+    loading.value=false
   }
 }
 
@@ -145,9 +165,10 @@ useSeo(title.value || 'Update Product', 'Update product details')
           <div class="flex gap-4 mt-4">
             <button
             @click="updateForm"
+            :disabled="loading"
               class="px-6 py-2 bg-blue-600 text-white rounded-lg font-bold"
             >
-              Update
+              {{loading?"Updating...":"Update"}}
             </button>
 
             <button

@@ -1,5 +1,7 @@
+import { db } from "~~/server/database";
 import { requireAdmin } from "~~/server/utils/auth";
-import { deleteProduct } from "~~/server/utils/data";
+import {products} from "../../database/schema"
+import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   requireAdmin(event);
@@ -12,7 +14,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const deleted = deleteProduct(id);
+  const [deleted] = await db.delete(products).where(eq(products.id,id)).returning();
 
   if (!deleted) {
     throw createError({
