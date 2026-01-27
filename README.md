@@ -1,75 +1,76 @@
-# Nuxt Minimal Starter
+# 🛒 Online Pasal - E-Commerce Platform
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> तपाईंको आफ्नै डिजिटल पसल (Your own digital store)
 
-## Setup
+A modern, full-featured e-commerce platform built with Nuxt.js, designed to serve the Nepali market with localized features and payment integration.
 
-Make sure to install dependencies:
+## 🌟 Features
 
-```bash
-# npm
-npm install
+### Core Functionality
+- 🛍️ **Product Catalog** - Browse and search through a wide range of products
+- 🛒 **Shopping Cart** - Add, remove, and manage items in your cart
+- 👤 **User Authentication** - Secure login and registration system
+- 📦 **Order Management** - Track your orders and purchase history
+- 💳 **Multiple Payment Options**
+  - eSewa Integration (Nepal's leading payment gateway)
+  - Cash on Delivery (COD)
 
-# pnpm
-pnpm install
+### User Experience
+- 📱 **Responsive Design** - Optimized for mobile, tablet, and desktop
+- ⚡ **Fast Performance** - Server-side rendering with Nuxt.js
 
-# yarn
-yarn install
+### Additional Features
+- 📞 **Contact Support** - Easy way to reach customer service
+- ℹ️ **About Page** - Learn more about the platform
 
-# bun
-bun install
-```
+## 🚀 Live Demo
 
-## Development Server
+Visit the live application: [online-pasal.vercel.app](https://online-pasal.vercel.app)
 
-Start the development server on `http://localhost:3000`:
+## 🛠️ Tech Stack
 
-```bash
-# npm
-npm run dev
+- **Framework:** [Nuxt.js 3](https://nuxt.com) - The Intuitive Vue Framework
+- **Frontend:** [Vue.js 3](https://vuejs.org) - The Progressive JavaScript Framework
+- **Language:** [TypeScript](https://www.typescriptlang.org) - JavaScript with syntax for types
+- **Styling:** [TailwindCSS](https://tailwindcss.com) - A utility-first CSS framework
+- **Package Manager:** [pnpm](https://pnpm.io) - Fast, disk space efficient package manager
+- **Deployment:** [Vercel](https://vercel.com) - Platform for frontend frameworks
 
-# pnpm
-pnpm dev
+## 📋 Prerequisites
 
-# yarn
-yarn dev
+Before you begin, ensure you have the following installed:
+- Node.js (v18 or higher)
+- pnpm (v8 or higher)
 
-# bun
-bun run dev
-```
+### Styling
 
-## Production
+The project uses TailwindCSS for styling. Customize the theme in `tailwind.config.ts`:
 
-Build the application for production:
+## 🔒 Security
 
-```bash
-# npm
-npm run build
+- User authentication and authorization
+- Protected API endpoints
+- Input validation and sanitization
 
-# pnpm
-pnpm build
+## 🤝 Contributing
 
-# yarn
-yarn build
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-# bun
-bun run build
-```
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Locally preview production build:
 
-```bash
-# npm
-npm run preview
+## 👨‍💻 Author
 
-# pnpm
-pnpm preview
+**Sujit Barnawal**
+- GitHub: [@sujitbarnawal](https://github.com/sujitbarnawal)
 
-# yarn
-yarn preview
+## 🙏 Acknowledgments
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [Nuxt.js](https://nuxt.com) for the amazing framework
+- [Vue.js](https://vuejs.org) for the reactive UI library
+- [TailwindCSS](https://tailwindcss.com) for the utility-first CSS framework
+- [Vercel](https://vercel.com) for seamless deployment
